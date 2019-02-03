@@ -14,7 +14,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// Require Sqreen before dotenv if possible
+let sqreen = false;
+if (process.env.SQREEN_TOKEN) {
+  require("sqreen");
+  sqreen = true;
+}
+
 require("dotenv").config();
+
+if (!sqreen) {
+  require("sqreen");
+}
+
 const logger = require("./util/logger").scope("shard manager");
 const { ShardingManager } = require("kurasuta");
 const DiceClient = require("./structures/DiceClient");
